@@ -1,0 +1,85 @@
+---
+title: "AN588-Week-3-chuhan"
+author: "Lia"
+date: "2023-09-29"
+output:
+  prettydoc::html_pretty:
+  theme: cayman
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Question 1
+
+What is the probablity that she will hear more than 8 calls during any given session? 
+
+```{r}
+l <- 15
+Pr8 <- ppois(8, l, lower.tail = FALSE)
+Pr8
+```
+
+Question 1 complete :)
+
+## Question 2
+
+What is the probablity that she will hear no calls in a session? 
+```{r}
+Pr0 <- ((l^0)*exp(-l))/(factorial(0))
+Pr0
+```
+
+Question 2 complete :)
+
+## Question 3
+
+What is the probability that she will hear exactly 3 calls in a session? 
+
+```{r}
+Pr3 <- ((l^3)*exp(-l))/(factorial(3))
+Pr3
+```
+
+Question 3 complete :)
+
+## Question 4
+
+Plot the relevant Poisson mass function over the values in range 0 ≤ x ≤ 30.
+
+```{r}
+x <- 0:30
+CallPr <- dpois(x=x, lambda=l)
+barplot(CallPr, names.arg=x, space=0, xlab="Titis Calls", ylab="Probability of Call Number", main="Probability Mass Function of Titis Calls")
+```
+
+Question 4 complete :)
+
+## Question 5
+
+Simulate 104 results from this distribution (i.e., 2 years of Saturday monitoring sessions).
+
+```{r}
+nSat <- 104
+SimResult <- rpois(nSat, l)
+SimResult
+```
+
+Question 5 complete :)
+
+## Question 6
+
+Plot the simulated results using hist() and use xlim() to set the horizontal limits to be from 0 to 30. How does your histogram compare to the shape of the probability mass function you plotted above?
+
+```{r}
+hist(SimResult, breaks=seq(from=0, to=30, by=1), probability=TRUE, main="Titis Call 2 Year Simulation", xlab="Number of Calls", ylab = "Probability of Call Number", xlim=c(0,30))
+```
+
+**Note: **I noticed that the hist() plot changes every time the Rmd file is knitted as Question 5 produces different simulation results. Is there a way or is it necessary to make the simulation result fixed? 
+
+Anyway, question 6 complete :)
+
+***
+
+Homework 2 complete :D
