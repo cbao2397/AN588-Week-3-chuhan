@@ -1,0 +1,113 @@
+---
+title: "AN588-Week-3-PeerCommentary"
+author: "Nicole"
+date: "2023-10-01"
+output:
+  prettydoc::html_pretty:
+  theme: cayman
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+## Peer Commentary
+1. *What you learned from running their Original Homework Code that helped* 
+*improve your own code:* I did pretty much all of the questions exactly the same 
+as you but one thing I really I noticed in your histogram was the sequence for
+the breaks (0 to 30 by1) made a lot of sense and looked nice on the plot. I just
+did c(0:30) and it does look basically the same but knowing that yours is going 
+up by 1 feels extra secure!
+2. *What you did in your own code that might help to improve theirs:* I noticed 
+you did not have a picture of a titi monkey formatted at the top. I found a way
+to include an image in a code chunk. It looks like this: {r titimonkey, 
+echo=FALSE, fig.align='center', fig.cap='[caption]', out.width='25%'}
+knitr::include_graphics('~/[file path]'). And you put that inside a chunk with
+the ``` on top and bottom. You could also try using HTML code in the markdown
+text parts.
+3. *What challenges, if any, you both faced in your code that could not be* 
+*helped by comparison:* I'm not sure you faced any challenges but I saw your
+note at the bottom about the histogram and the random numbers being generated.
+I am not sure if there is an established way to 'save' the random numbers once
+generated but you could run SimResult, copy and paste the results to a new
+vector, then use that as the data in the histogram. It's a little round a bout
+but gets at what you're asking.
+4. *Whether the annotation/commenting on your peer’s Original Homework Code is* 
+*readable and interpretable to you, and if not then how it could be improved:*
+Your headers, text, and chunks are very readable! It's super easy to navigate.
+You might improved with named chunks in case you run into issues with knitting,
+but most of my knitting issues are from accidentally naming two chunks the same
+name so take that advice with a grain of salt! A table of contents might also
+be helpful. That goes into the YAML with toc: true in the output.
+
+## Question 1
+
+What is the probablity that she will hear more than 8 calls during any given session? 
+
+```{r}
+l <- 15
+Pr8 <- ppois(8, l, lower.tail = FALSE)
+Pr8
+```
+
+Question 1 complete :)
+
+## Question 2
+
+What is the probablity that she will hear no calls in a session? 
+```{r}
+Pr0 <- ((l^0)*exp(-l))/(factorial(0))
+Pr0
+```
+
+Question 2 complete :)
+
+## Question 3
+
+What is the probability that she will hear exactly 3 calls in a session? 
+
+```{r}
+Pr3 <- ((l^3)*exp(-l))/(factorial(3))
+Pr3
+```
+
+Question 3 complete :)
+
+## Question 4
+
+Plot the relevant Poisson mass function over the values in range 0 ≤ x ≤ 30.
+
+```{r}
+x <- 0:30
+CallPr <- dpois(x=x, lambda=l)
+barplot(CallPr, names.arg=x, space=0, xlab="Titis Calls", ylab="Probability of Call Number", main="Probability Mass Function of Titis Calls")
+```
+
+Question 4 complete :)
+
+## Question 5
+
+Simulate 104 results from this distribution (i.e., 2 years of Saturday monitoring sessions).
+
+```{r}
+nSat <- 104
+SimResult <- rpois(nSat, l)
+SimResult
+```
+
+Question 5 complete :)
+
+## Question 6
+
+Plot the simulated results using hist() and use xlim() to set the horizontal limits to be from 0 to 30. How does your histogram compare to the shape of the probability mass function you plotted above?
+
+```{r}
+hist(SimResult, breaks=seq(from=0, to=30, by=1), probability=TRUE, main="Titis Call 2 Year Simulation", xlab="Number of Calls", ylab = "Probability of Call Number", xlim=c(0,30))
+```
+
+**Note: **I noticed that the hist() plot changes every time the Rmd file is knitted as Question 5 produces different simulation results. Is there a way or is it necessary to make the simulation result fixed? 
+
+Anyway, question 6 complete :)
+
+***
+
+Homework 2 complete :D
