@@ -1,0 +1,109 @@
+---
+title: "AN588-Week-3-chuhan"
+author: "Lia"
+date: "2023-10-04"
+output:
+  prettydoc::html_pretty:
+    theme: cayman
+    toc: true
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=FALSE, fig.align='center', fig.cap="Titi Monkey|Smithsonian's National Zoo", out.width="50%"}
+knitr::include_graphics('C:/Users/Anemone/Desktop/BU/2023Fall/BI588/Development/Homework2/AN588-Week-3-chuhan/Titi.jpg')
+```
+
+## Question 1
+
+What is the probability that she will hear more than 8 calls during any given session? 
+
+```{r}
+l <- 15
+Pr8 <- ppois(8, l, lower.tail = FALSE)
+Pr8
+```
+
+Question 1 complete :)
+
+***
+
+## Question 2
+
+What is the probability that she will hear no calls in a session? 
+```{r}
+Pr0 <- ((l^0)*exp(-l))/(factorial(0))
+Pr0
+```
+
+Question 2 complete :)
+
+***
+
+## Question 3
+
+What is the probability that she will hear exactly 3 calls in a session? 
+
+```{r}
+Pr3 <- ((l^3)*exp(-l))/(factorial(3))
+Pr3
+```
+
+Question 3 complete :)
+
+***
+
+## Question 4
+
+Plot the relevant Poisson mass function over the values in range 0 ≤ x ≤ 30.
+
+```{r}
+x <- 0:30
+CallPr <- dpois(x=x, lambda=l)
+barplot(CallPr, names.arg=x, space=0, xlab="Titis Calls", ylab="Probability of Call Number", main="Probability Mass Function of Titis Calls")
+```
+
+Question 4 complete :)
+
+***
+
+## Question 5
+
+Simulate 104 results from this distribution (i.e., 2 years of Saturday monitoring sessions).
+
+```{r}
+nSat <- 104
+SimResult <- rpois(nSat, l)
+SimResult
+```
+
+Question 5 complete :)
+
+***
+
+## Question 6
+
+Plot the simulated results using hist() and use xlim() to set the horizontal limits to be from 0 to 30. How does your histogram compare to the shape of the probability mass function you plotted above?
+
+```{r}
+hist(SimResult, breaks=seq(from=0, to=100, by=1), probability=TRUE, main="Titis Call 2 Year Simulation", xlab="Number of Calls", ylab = "Probability of Call Number", xlim=c(0,30))
+```
+
+Question 6 complete :)
+
+***
+
+## Reflection
+
+1. (About Question 6) I noticed that the hist() plot changes every time the Rmd file is knitted as Question 5 produces different simulation results. My peer left comments on this problem, suggesting that I can copy and paste the result and assign it to a new vector. I also thought about this question, and now I feel like it's probably not so necessary to save the result since that's just the repeatable simulation and results (at least the trend) should be relatively similar if we have larger simulation result number. 
+
+2. (Still about Question 6) When runningthe original code, by a small chance error occur when knitting, telling me that there are data not counted, possibly because breaks() didn't range the whole SimResult range. After changing the breaks() seq limitation to 0-100, the error stops occuring. With xlim=c(0,30), the range of the plot still stays in 0-30. 
+
+3. Shoutout to my peer. She really gave me detailed feedback carefully :] It was also nice learning new things from my peers' works. We mainly chose the same solutions for questions in the assignment this time, but there were a lot detailed things to learn from each other. 
+
+***
+
+Homework 2 complete :D
